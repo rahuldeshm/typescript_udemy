@@ -1,26 +1,12 @@
 "use strict";
-const num1e = document.getElementById("num1");
-const num2e = document.getElementById("num2");
-const buttonElement = document.querySelector("button");
-const numResluts = [];
-function addt(num1, num2) {
-    return num1 + num2;
-}
-function printResult(resultObj) {
-    console.log(resultObj.val, resultObj.time);
-}
-buttonElement === null || buttonElement === void 0 ? void 0 : buttonElement.addEventListener("click", () => {
-    const num1 = num1e.value;
-    const num2 = num2e.value;
-    const result = addt(+num1, +num2);
-    numResluts.push(result);
-    printResult({ val: result, time: new Date() });
-});
-const myPromise = new Promise((res, rej) => {
-    setTimeout(() => {
-        res("it worked");
-    }, 1000);
-});
-myPromise.then((result) => {
-    console.log(result.split("w"));
-});
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const todos_1 = __importDefault(require("./routes.js/todos"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const app = (0, express_1.default)();
+app.use(body_parser_1.default.json());
+app.use("/todo", todos_1.default);
+app.listen(3000);
