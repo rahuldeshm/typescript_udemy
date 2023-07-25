@@ -7,16 +7,18 @@ router.get("/todo", (req, res, next) => {
     res.status(200).json({ todos: todos });
 });
 router.post("/todo", (req, res, next) => {
+    const body = req.body;
     const newTodo = {
         id: new Date().toISOString(),
-        text: req.body.text,
+        text: body.text,
     };
     console.log(newTodo);
     todos.push(newTodo);
     res.status(200).json({ todo: newTodo });
 });
 router.delete("/todo", (req, res, next) => {
-    const id = req.body.id;
+    const body = req.body;
+    const id = body.id;
     const ftodo = todos.findIndex((e, index) => e.id === id);
     console.log(ftodo);
     if (ftodo !== -1) {
@@ -30,12 +32,13 @@ router.delete("/todo", (req, res, next) => {
     }
 });
 router.post("/edit", (req, res, next) => {
-    const id = req.body.id;
+    const body = req.body;
+    const id = body.id;
     const ftodo = todos.findIndex((e, index) => e.id === id);
     if (ftodo !== -1) {
         const obj = Object.assign({}, todos[ftodo]);
         console.log(obj);
-        obj.text = req.body.text;
+        obj.text = body.text;
         todos[ftodo] = obj;
         res
             .status(200)
